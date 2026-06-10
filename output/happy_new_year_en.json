@@ -1,0 +1,40 @@
+{
+  "name": "happy_new_year",
+  "category": "MARKETING",
+  "language": "en",
+  "components": [
+    {
+      "type": "HEADER",
+      "example": {
+        "header_handle": [
+          "image"
+        ]
+      }
+    },
+    {
+      "type": "BODY",
+      "text": "Wishing you a Happy New Year and a great year ahead with code {{1}}!",
+      "example": {
+        "body_text": [
+          [
+            "2024"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "QUICK_REPLY",
+          "text": "Happy New Year",
+          "example": {
+            "quick_reply_text": [
+              "Happy New Year"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

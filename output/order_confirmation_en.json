@@ -1,0 +1,21 @@
+{
+  "name": "order_confirmation",
+  "category": "UTILITY",
+  "language": "en",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Hello {{customer_name}}, your order {{order_id}} has been confirmed."
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "URL",
+          "url": "https://example.com/track-order",
+          "title": "Track Order"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "abandoned_cart_reminder",
+  "category": "UTILITY",
+  "language": "en",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "You have an abandoned cart with {{1}}. Please click this link to complete checkout: {{2}}. Thank you"
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "URL",
+          "url": "{{2}}",
+          "title": "Complete Checkout"
+        }
+      ]
+    }
+  ]
+}

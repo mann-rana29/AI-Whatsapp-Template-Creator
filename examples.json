@@ -1,0 +1,145 @@
+[
+  {
+    "name": "welcome_message",
+    "category": "UTILITY",
+    "language": "en",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "Hello {{1}}, welcome to our platform! Your account is now active.",
+        "example": {
+          "body_text": [
+            ["Navneet"]
+          ]
+        }
+      },
+      {
+        "type": "FOOTER",
+        "text": "Reply STOP to unsubscribe"
+      }
+    ]
+  },
+  {
+    "name": "order_shipped_alert",
+    "category": "UTILITY",
+    "language": "en_US",
+    "components": [
+      {
+        "type": "HEADER",
+        "format": "IMAGE",
+        "example": {
+          "header_handle": [
+            "https://example.com/shipping-image.jpg"
+          ]
+        }
+      },
+      {
+        "type": "BODY",
+        "text": "Hi {{1}}, your order {{2}} has just shipped!",
+        "example": {
+          "body_text": [
+            ["Navneet", "ORD-12345"]
+          ]
+        }
+      },
+      {
+        "type": "FOOTER",
+        "text": "Thanks for shopping with us."
+      },
+      {
+        "type": "BUTTONS",
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "Track Order",
+            "url": "https://track.example.com/{{1}}",
+            "example": [
+              "https://track.example.com/ORD-12345"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  
+  {
+    "name": "product_carousel",
+    "category": "MARKETING",
+    "language": "en",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "Check out our top picks for you this week!"
+      },
+      {
+        "type": "CAROUSEL",
+        "cards": [
+          {
+            "components": [
+              {
+                "type": "HEADER",
+                "format": "IMAGE",
+                "example": {
+                  "header_handle": [
+                    "https://example.com/product1.jpg"
+                  ]
+                }
+              },
+              {
+                "type": "BODY",
+                "text": "Get our new {{1}} shoes today.",
+                "example": {
+                  "body_text": [
+                    ["Running"]
+                  ]
+                }
+              },
+              {
+                "type": "BUTTONS",
+                "buttons": [
+                  {
+                    "type": "URL",
+                    "text": "View Product 1",
+                    "url": "https://example.com/shoes/1"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "components": [
+              {
+                "type": "HEADER",
+                "format": "IMAGE",
+                "example": {
+                  "header_handle": [
+                    "https://example.com/product2.jpg"
+                  ]
+                }
+              },
+              {
+                "type": "BODY",
+                "text": "Try the ultimate {{1}} jacket.",
+                "example": {
+                  "body_text": [
+                    ["Winter"]
+                  ]
+                }
+              },
+              {
+                "type": "BUTTONS",
+                "buttons": [
+                  {
+                    "type": "URL",
+                    "text": "View Product 2",
+                    "url": "https://example.com/jackets/1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

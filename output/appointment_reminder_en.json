@@ -1,0 +1,38 @@
+{
+  "name": "appointment_reminder",
+  "category": "UTILITY",
+  "language": "en",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "You have an appointment on {{1}} at {{2}}.",
+      "example": {
+        "body_text": [
+          [
+            "2024-09-17",
+            "10:00 AM"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "BUTTONS",
+      "buttons": [
+        {
+          "type": "QUICK_REPLY",
+          "text": "Reschedule",
+          "example": {
+            "quick_reply_text": "Reschedule"
+          }
+        },
+        {
+          "type": "PHONE_NUMBER",
+          "text": "Call Us",
+          "example": {
+            "phone_number": "+1234567890"
+          }
+        }
+      ]
+    }
+  ]
+}
