@@ -1,0 +1,11 @@
+{
+  "name": "otp_verification",
+  "category": "AUTHENTICATION",
+  "language": "hi",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "\u0906\u092a\u0915\u093e \u0938\u0924\u094d\u092f\u093e\u092a\u0928 \u0915\u094b\u0921 \u0939\u0948 {{1}}\u0964"
+    }
+  ]
+}
