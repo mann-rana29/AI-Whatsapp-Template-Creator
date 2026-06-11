@@ -1,0 +1,97 @@
+{
+  "name": "demo_template",
+  "category": "MARKETING",
+  "language": "hi",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "\u0909\u0924\u094d\u092a\u093e\u0926 \u0935\u093f\u0935\u0930\u0923"
+    },
+    {
+      "type": "CAROUSEL",
+      "cards": [
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "\u0909\u0924\u094d\u092a\u093e\u0926 1 \u0935\u093f\u0935\u0930\u0923"
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "URL",
+                  "text": "\u0916\u0930\u0940\u0926\u0947\u0902",
+                  "url": "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "\u0909\u0924\u094d\u092a\u093e\u0926 2 \u0935\u093f\u0935\u0930\u0923"
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "URL",
+                  "text": "\u0916\u0930\u0940\u0926\u0947\u0902",
+                  "url": "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "\u0909\u0924\u094d\u092a\u093e\u0926 3 \u0935\u093f\u0935\u0930\u0923"
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "URL",
+                  "text": "\u0916\u0930\u0940\u0926\u0947\u0902",
+                  "url": "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

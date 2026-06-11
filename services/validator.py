@@ -32,8 +32,9 @@ def validate_template(template : dict) -> list:
                 errors.append("BODY text cannot be empty.")
 
             stripped_text = text.strip()
-            if stripped_text.startswith("{{") or stripped_text.endswith("}}"):
-                errors.append("BODY must not start or end with a variable (and cannot be 100% variables).")
+            clean_text = re.sub(r'^[^\w\{]+|[^\w\}]+$', '', stripped_text)
+            if clean_text.startswith("{{") or clean_text.endswith("}}"):
+                errors.append("BODY must not start or end with a variable (even if followed by punctuation).")
 
             vars_found = re.findall(r'\{\{(.+?)\}\}', text)
 

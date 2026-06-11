@@ -1,0 +1,94 @@
+{
+  "name": "product_carousel",
+  "category": "MARKETING",
+  "language": "en",
+  "components": [
+    {
+      "type": "BODY",
+      "text": "Check out our products below."
+    },
+    {
+      "type": "CAROUSEL",
+      "cards": [
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "{{1}}"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "{{2}}. Please visit our website for more details."
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "QUICK_REPLY",
+                  "text": "Buy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "{{3}}"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "{{4}}. Please visit our website for more details."
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "QUICK_REPLY",
+                  "text": "Buy"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "components": [
+            {
+              "type": "HEADER",
+              "format": "IMAGE",
+              "example": {
+                "header_handle": [
+                  "{{5}}"
+                ]
+              }
+            },
+            {
+              "type": "BODY",
+              "text": "{{6}}. Please visit our website for more details."
+            },
+            {
+              "type": "BUTTONS",
+              "buttons": [
+                {
+                  "type": "QUICK_REPLY",
+                  "text": "Buy"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

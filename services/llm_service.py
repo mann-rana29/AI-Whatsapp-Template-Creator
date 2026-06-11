@@ -1,6 +1,7 @@
 import os
 import json
 from groq import Groq
+from services.validator import validate_template
 
 SYSTEM_PROMPT = """You are a WhatsApp Template creation assistant.
 Your goal is to gather requirements from the user and automatically build a valid WhatsApp template JSON.
@@ -8,12 +9,14 @@ Only ask 1-2 questions at a time if information is missing. Auto-fill what you c
 
 Meta WhatsApp Template Rules:
 1. Variables must be positional like {{1}} or named like {{order_id}}.
-2. Body must not end or start with a variable. Positional variables must start at {{1}} and be sequential.
+2. Body must not end or start with a variable, EVEN if followed by punctuation. Always add words after the last variable, e.g., instead of "Your code is {{1}}", use "Your code is {{1}}. Please do not share it." Positional variables must start at {{1}} and be sequential.
 3. Supported languages: hi, bn_IN, gu, kn, ml, mr, pa, ta, te, ur, en, en_IN, en_US, en_GB.
 4. Categories: MARKETING, UTILITY, AUTHENTICATION.
 5. Buttons: URL buttons max 2. QUICK_REPLY text max 25 chars.
 6. A template can have an IMAGE, VIDEO, or DOCUMENT header. In that case, add an `example.header_handle` list.
-7. Carousel templates have cards, no top-level buttons or footer.
+7. Carousel templates have cards, no top-level buttons or footer. Example: component type CAROUSEL, with a "cards" array. Each card MUST have a "components" array containing HEADER, BODY, and BUTTONS. The HEADER must strictly have `"format": "IMAGE"` or `"VIDEO"` and an `example.header_handle`. Example card component: `[{"type": "HEADER", "format": "IMAGE", "example": {"header_handle": ["url"]}}, {"type": "BODY", "text": "..."}]`
+8. If the user asks a question completely unrelated to WhatsApp Templates (e.g. general knowledge, math, coding), you must politely decline in the `ai_message` and return the existing `template` without modifications.
+9. If the user indicates they are satisfied, says "it's good", "looks good", or similar, DO NOT ask any more questions. Simply respond with a friendly confirmation (e.g., "Great! Your template is ready to be saved.") and return the exact same `template`.
 
 You MUST respond strictly with a valid JSON object matching this schema:
 {
@@ -60,6 +63,29 @@ def generate_response(user_input, chat_history, current_template):
         
         content = response.choices[0].message.content
         data = json.loads(content)
+        
+        # Validate the generated template
+        new_template = data.get("template", {})
+        if new_template:
+            errors = validate_template(new_template)
+            if errors:
+                # Provide the errors back to the LLM to fix
+                error_msg = "Your generated template failed validation with the following errors:\n"
+                for err in errors:
+                    error_msg += f"- {err}\n"
+                error_msg += "CRITICAL INSTRUCTION: Fix these JSON errors silently. Do NOT mention these errors or the fact that you are fixing them in your `ai_message`. Your `ai_message` must simply respond to the user's last message naturally, asking the next appropriate clarifying question to gather any missing template requirements."
+                
+                messages.append({"role": "assistant", "content": content})
+                messages.append({"role": "user", "content": error_msg})
+                
+                retry_response = client.chat.completions.create(
+                    model="llama-3.3-70b-versatile", 
+                    messages=messages,
+                    response_format={"type": "json_object"},
+                    temperature=0.2,
+                )
+                data = json.loads(retry_response.choices[0].message.content)
+                
         return data
     except Exception as e:
         return {
