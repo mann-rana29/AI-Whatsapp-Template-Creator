@@ -57,6 +57,11 @@ def validate_template(template : dict) -> list:
 
             if len(text) > 1024:
                 errors.append("BODY text cannot exceed 1024 characters")
+                
+            if vars_found:
+                example = comp.get("example", {})
+                if "body_text" not in example or not isinstance(example["body_text"], list) or not example["body_text"]:
+                    errors.append("BODY with variables must have 'example.body_text' containing sample values.")
 
         elif comp_type == "HEADER":
             format_type = comp.get("format","")
@@ -77,6 +82,12 @@ def validate_template(template : dict) -> list:
                 example = comp.get("example",{})
                 if "header_handle" not in example:
                     errors.append(f"HEADER of format {format_type} must have 'example.header_handle'. ")
+                else:
+                    handles = example.get("header_handle", [])
+                    if not handles or not isinstance(handles, list):
+                        errors.append("HEADER 'example.header_handle' must be a non-empty list.")
+                    elif any("{{" in str(h) for h in handles):
+                        errors.append("HEADER 'example.header_handle' cannot contain variables. It must be an actual valid sample URL/handle.")
             
         elif comp_type == "FOOTER":
             footer_text = comp.get("text", "")
@@ -155,6 +166,16 @@ def validate_template(template : dict) -> list:
                     elif h_fmt != first_header_format:
                         errors.append("All Carousel cards must have the exact same header format.")
                         
+                    h_example = header.get("example", {})
+                    if "header_handle" not in h_example:
+                        errors.append(f"Card {i+1} HEADER must have 'example.header_handle'.")
+                    else:
+                        h_handles = h_example.get("header_handle", [])
+                        if not h_handles or not isinstance(h_handles, list):
+                            errors.append(f"Card {i+1} HEADER 'example.header_handle' must be a non-empty list.")
+                        elif any("{{" in str(h) for h in h_handles):
+                            errors.append(f"Card {i+1} HEADER 'example.header_handle' cannot contain variables. It must be a valid sample URL/handle.")
+                        
                 body = next((c for c in card_comps if c.get("type") == "BODY"), None)
                 if body:
                     b_text = body.get("text", "")
@@ -163,8 +184,13 @@ def validate_template(template : dict) -> list:
                     
                     num_vars = len(re.findall(r'\{\{(.+?)\}\}', b_text))
                     num_words = len(b_text.split())
-                    if num_vars > 0 and num_words < (2 * num_vars + 1):
-                        errors.append(f"Card {i+1} BODY needs at least {2*num_vars + 1} words for {num_vars} variables.")
+                    if num_vars > 0:
+                        if num_words < (2 * num_vars + 1):
+                            errors.append(f"Card {i+1} BODY needs at least {2*num_vars + 1} words for {num_vars} variables.")
+                        
+                        b_example = body.get("example", {})
+                        if "body_text" not in b_example or not isinstance(b_example["body_text"], list) or not b_example["body_text"]:
+                            errors.append(f"Card {i+1} BODY with variables must have 'example.body_text' containing sample values.")
 
                 btn_comp = next((c for c in card_comps if c.get("type") == "BUTTONS"), None)
                 if btn_comp:
